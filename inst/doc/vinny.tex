@@ -32,6 +32,9 @@ This library was written by Komei Fukuda and is available at
 Our \verb@rcdd@ package for R provides an interface to most
 of the functionality of the \verb@cddlib@ library.
 
+The version of R used to make this document is 2.9.0.  The version
+of the \texttt{rcdd} package used to make this document is 1.1-2.
+
 \section{Representations}
 
 The two descriptions in question are the descriptions of a convex polyhedron
@@ -983,7 +986,7 @@ that are the \emph{vertices} or \emph{extreme points} of the hull.
 \begin{Schunk}
 \begin{Sinput}
 > foo <- cbind(0, cbind(1, x))
-> out <- redundant(d2q(foo))
+> out <- redundant(d2q(foo), representation = "V")
 > nrow(out$output)
 \end{Sinput}
 \begin{Soutput}
