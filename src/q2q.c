@@ -21,6 +21,7 @@
 
 #include <Rinternals.h>
 #include <gmp.h>
+#include <stdlib.h>
 
 SEXP q2q(SEXP foo)
 {
@@ -36,7 +37,7 @@ SEXP q2q(SEXP foo)
 
     int k;
     for (k = 0; k < n; k++) {
-        char *zstr = CHAR(STRING_ELT(foo, k));
+        char *zstr = (char *) CHAR(STRING_ELT(foo, k));
         if (mpq_set_str(value, zstr, 10) == -1)
             error("error converting string to GMP rational");
         mpq_canonicalize(value);

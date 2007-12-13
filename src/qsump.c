@@ -21,48 +21,54 @@
 
 #include <Rinternals.h>
 #include <gmp.h>
+#include <stdlib.h>
 
-SEXP qmq(SEXP foo, SEXP bar)
+SEXP qsump(SEXP foo, SEXP op)
 {
-    if ((! isString(foo)) || (! isString(bar)))
-        error("arguments must be character");
-    if (LENGTH(foo) != LENGTH(bar))
-        error("arguments must be same length");
+    if ((! isString(foo)))
+        error("argument must be character");
     int n = LENGTH(foo);
 
-    SEXP baz;
-    PROTECT(baz = duplicate(foo));
+    if (! isInteger(op))
+        error("'op' must be integer");
+    if (LENGTH(op) != 1)
+        error("'op' must be scalar");
+    int the_op = INTEGER(op)[0];
+    if (the_op <= 0 || the_op > 2)
+        error("'op' not recognized, must be 1 (+), 2 (*)");
 
-    mpq_t value1, value2, value3;
+    mpq_t value1, value2, value3, zero;
     mpq_init(value1);
-    mpq_init(value2);
     mpq_init(value3);
+    if (the_op == 2)
+        mpq_set_si(value3, 1, 1);
 
     int k;
     for (k = 0; k < n; k++) {
 
         char *zstr;
 
-        zstr = CHAR(STRING_ELT(foo, k));
+        zstr = (char *) CHAR(STRING_ELT(foo, k));
         if (mpq_set_str(value1, zstr, 10) == -1)
             error("error converting string to GMP rational");
         mpq_canonicalize(value1);
 
-        zstr = CHAR(STRING_ELT(bar, k));
-        if (mpq_set_str(value2, zstr, 10) == -1)
-            error("error converting string to GMP rational");
-        mpq_canonicalize(value2);
+        switch (the_op) {
+            case 1:
+                mpq_add(value3, value1, value3);
+                break;
+            case 2:
+                mpq_mul(value3, value1, value3);
+                break;
+        }
 
-        mpq_sub(value3, value1, value2);
-
-        zstr = NULL;
-        zstr = mpq_get_str(zstr, 10, value3);
-        SET_STRING_ELT(baz, k, mkChar(zstr));
-        free(zstr);
     }
 
+    SEXP baz;
+    char *zstr = mpq_get_str(NULL, 10, value3);
+    PROTECT(baz = ScalarString(mkChar(zstr)));
+    free(zstr);
     mpq_clear(value1);
-    mpq_clear(value2);
     mpq_clear(value3);
     UNPROTECT(1);
     return(baz);

@@ -1,3 +1,3 @@
 PKG_CFLAGS = 
-PKG_CPPFLAGS = -I/APPS/include -DGMPRATIONAL
-PKG_LIBS = -L/APPS/lib -lcddgmp -lgmp
+PKG_CPPFLAGS =  -DGMPRATIONAL
+PKG_LIBS =  -lgmp
