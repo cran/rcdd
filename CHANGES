@@ -113,3 +113,8 @@
  0.9  added redundant which eliminates redundant rows from H-representation
       or V-representation
 
+ 0.10 added allface which produces list of faces from H-representation
+
+      added several sections to package vignette describing new functions
+      added since 0.7
+
