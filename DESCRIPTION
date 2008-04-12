@@ -1,6 +1,6 @@
 Package: rcdd
-Version: 1.0-1
-Date: 2008-03-06
+Version: 1.1
+Date: 2008-04-12
 Title: rcdd (C Double Description for R)
 Author: Charles J. Geyer <charlie@stat.umn.edu> and
     Glen D. Meeden <glen@stat.umn.edu>, incorporates code from
@@ -16,4 +16,4 @@ Description: R interface to (some of) cddlib,
     also does linear programming with exact arithmetic
 License: GPL (>= 2)
 URL: http://www.stat.umn.edu/geyer/rcdd/
-Packaged: Thu Mar  6 10:25:34 2008; charlie
+Packaged: Sat Apr 12 07:59:47 2008; charlie
