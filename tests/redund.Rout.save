@@ -1,7 +1,8 @@
 
-R version 2.6.1 (2007-11-26)
-Copyright (C) 2007 The R Foundation for Statistical Computing
+R version 2.12.1 (2010-12-16)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: i686-pc-linux-gnu (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -17,18 +18,18 @@ Type 'q()' to quit R.
 
 > 
 >  library(rcdd)
+If you want correct answers, use rational arithmetic.
+See the Warnings sections added to help pages for
+    functions that do computational geometry.
 > 
 >  ##### H-representation #####
 > 
->  hrep <- scan()
-1:  0  0  1  1  0
-6:  0  0 -1  0  0
-11:  0  0  0 -1  0
-16:  0  0  0  0 -1
-21:  0  0 -1 -1 -1
-26: 
-Read 25 items
->  hrep <- matrix(hrep, ncol = 5, byrow = TRUE)
+>  hrep <- rbind(
++  c(0,  0,  1,  1,  0),
++  c(0,  0, -1,  0,  0),
++  c(0,  0,  0, -1,  0),
++  c(0,  0,  0,  0, -1),
++  c(0,  0, -1, -1, -1))
 > 
 >  redundant(d2q(hrep), representation = "H")
 $output
@@ -146,14 +147,11 @@ $new.position
 > 
 >  ##### another V-representation #####
 > 
->  hrep <- scan()
-1:  0  0  1  0  0
-6:  0  0  0  1  0
-11:  0  0  0  0  1
-16:  0  0 -1 -1 -1
-21: 
-Read 20 items
->  hrep <- matrix(hrep, ncol = 5, byrow = TRUE)
+>  hrep <- rbind(
++  c(0,  0,  1,  0,  0),
++  c(0,  0,  0,  1,  0),
++  c(0,  0,  0,  0,  1),
++  c(0,  0, -1, -1, -1))
 > 
 >  redundant(d2q(hrep), representation = "V")
 $output
@@ -189,16 +187,13 @@ $new.position
 > 
 >  ##### negative new position #####
 > 
->  hrep <- scan()
-1:  1  0  1  0  0
-6:  1  0  0  1  0
-11:  1  0  0  0  1
-16:  1  0  0  1  0
-21:  1  0  0  0  1
-26:  1  0  0  0  1
-31: 
-Read 30 items
->  hrep <- matrix(hrep, ncol = 5, byrow = TRUE)
+>  hrep <- rbind(
++  c(1, 0, 1, 0, 0),
++  c(1, 0, 0, 1, 0),
++  c(1, 0, 0, 0, 1),
++  c(1, 0, 0, 1, 0),
++  c(1, 0, 0, 0, 1),
++  c(1, 0, 0, 0, 1))
 > 
 >  redundant(hrep, representation = "V")
 $output
