@@ -165,3 +165,20 @@
         add warning "use rational arithmetic" to help for
             computational geometry functions and print brief
             warning when library is attached
+
+ 1.1-5  fix makeH to work with rational arithmetic
+        fix complaints from R CMD check
+            rename all.union and all.intersect because all is now generic
+            get rid of all printf that might actually print
+        fixed bug in calling rr_* function from *_f function (should be
+            and now is (rrf_* function)
+        minor changes to documentation and vignette
+        add function makeV to match makeH
+
+ 1.1-6  fix configure.ac to comport with instructions in "Writing R Extensions"
+
+ 1.1-7  a million totally unnecessary changes to cddlib to comply with
+        the draconian and terribly implemented requirement about
+        stdio/stderr in CRAN packages
+
+        changes to vignette to use makeV

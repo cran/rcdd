@@ -32,8 +32,8 @@ This library was written by Komei Fukuda and is available at
 Our \verb@rcdd@ package for R provides an interface to most
 of the functionality of the \verb@cddlib@ library.
 
-The version of R used to make this document is 2.12.1.  The version
-of the \texttt{rcdd} package used to make this document is 1.1-4.
+The version of R used to make this document is 2.14.2.  The version
+of the \texttt{rcdd} package used to make this document is 1.1-7.
 
 \section{Representations}
 
@@ -208,15 +208,9 @@ help page, never mind how \verb@makeH@ works, just look at the matrix
 \begin{Schunk}
 \begin{Sinput}
 > library(rcdd)
-\end{Sinput}
-\begin{Soutput}
-If you want correct answers, use rational arithmetic.
-See the Warnings sections added to help pages for
-    functions that do computational geometry.
-\end{Soutput}
-\begin{Sinput}
 > d <- 3
-> qux <- makeH(-diag(d), rep(0, d), rep(1, d), 1)
+> # unit simplex in H-representation
+> qux <- makeH(- diag(d), rep(0, d), rep(1, d), 1)
 > print(qux)
 \end{Sinput}
 \begin{Soutput}
@@ -234,6 +228,7 @@ and the other three rows represent the inequality constraints \verb@x[i] >= 0@
 for \verb@i@ in \verb@1:d@.
 \begin{Schunk}
 \begin{Sinput}
+> # unit simplex in V-representation
 > out <- scdd(qux)
 > print(out)
 \end{Sinput}
@@ -251,6 +246,8 @@ The corresponding V-representation has 3 vertices,
 $(1, 0, 0)$, $(0, 1, 0)$, $(0, 0, 1)$.
 \begin{Schunk}
 \begin{Sinput}
+> # unit simplex in H-representation
+> # note: different from original, but equivalent
 > out <- scdd(out$output)
 > print(out)
 \end{Sinput}
@@ -281,6 +278,7 @@ probability vectors \verb@p@ and that satisfy the equality constraint
 \verb@sum(p * x) == 2.2@.
 \begin{Schunk}
 \begin{Sinput}
+> # add equality constraint
 > quux <- addHeq(1:d, 2.2, qux)
 > print(quux)
 \end{Sinput}
@@ -321,8 +319,13 @@ numbers and we bring this facility to \verb@rcdd@ as well.
 
 In order to use rational arithmetic, we need a rational number format.
 Adding a new numeric type to R would be a job of horrendous complexity,
-so we don't even try.  We just use the representation of the rational
-as a character string, e.~g., \verb@"3/4"@ or \verb@"-15/32"@.
+so we don't even try (this has actually been done in the \texttt{gmp} package
+but that package was written long after the \texttt{rcdd} package).
+We just use the representation of the rational
+as a character string, e.~g., \verb@"3/4"@ or \verb@"-15/32"@
+(perhaps some day there will be a version of \texttt{rcdd} that uses objects
+of type \texttt{bigq} from the \texttt{gmp} package, but the current version
+cannot).
 \begin{Schunk}
 \begin{Sinput}
 > quuxq <- d2q(quux)
@@ -345,14 +348,14 @@ of powers of 2).
 We can see that the rational representation does make sense
 \begin{Schunk}
 \begin{Sinput}
-> bar <- as.numeric(unlist(strsplit(quuxq[5, 2], "/")))
+> bar <- as.numeric(unlist(strsplit(quuxq[5,2], "/")))
 > print(bar)
 \end{Sinput}
 \begin{Soutput}
 [1] 2.47698e+15 1.12590e+15
 \end{Soutput}
 \begin{Sinput}
-> bar[1]/bar[2]
+> bar[1] / bar[2]
 \end{Sinput}
 \begin{Soutput}
 [1] 2.2
@@ -379,8 +382,8 @@ attr(,"representation")
 \end{Schunk}
 
 But that was just a preliminary explanation.  The point is that \verb@scdd@
-uses rational representations like \verb@quuxq@ just as well as (better
-actually) inexact floating point representations like \verb@quux@.
+uses rational representations like \verb@quuxq@ just as well as (actually
+better than) inexact floating point representations like \verb@quux@.
 \begin{Schunk}
 \begin{Sinput}
 > outq <- scdd(quuxq)
@@ -508,11 +511,11 @@ Let's try to find convex hulls in \verb@d@ dimensions.
 > n <- 100
 > set.seed(42)
 > x <- matrix(rnorm(d * n), nrow = n)
-> foo <- cbind(0, cbind(1, x))
-> out <- scdd(d2q(foo), representation = "V")
-> l <- out$output[, 1]
-> b <- out$output[, 2]
-> v <- out$output[, -c(1, 2)]
+> foo <- makeV(d2q(x))
+> out <- scdd(foo)
+> l <- out$output[ , 1]
+> b <- out$output[ , 2]
+> v <- out$output[ , - c(1, 2)]
 > a <- qneg(v)
 \end{Sinput}
 \end{Schunk}
@@ -604,9 +607,10 @@ function.
 
 \begin{Schunk}
 \begin{Sinput}
-> hrep <- rbind(c("0", "0", "1", "1", "0", "0"), c("0", 
-+     "0", "0", "2", "0", "0"), c("1", "3", "0", "-1", 
-+     "0", "0"), c("1", "9/2", "0", "0", "-1", "-1"))
+> hrep <- rbind(c("0", "0", "1", "1", "0", "0"),
++               c("0", "0", "0", "2", "0", "0"),
++               c("1", "3", "0", "-1", "0", "0"),
++               c("1", "9/2", "0", "0", "-1", "-1"))
 > print(hrep)
 \end{Sinput}
 \begin{Soutput}
@@ -654,9 +658,9 @@ We can check that this does indeed give the stated optimal value
 Moreover, we can check the Kuhn-Tucker conditions for optimality,
 one statement of which follows.  For the problem
 \begin{align*}
-   \text{minimize} & \quad f(x)
+   \text{minimize } & \quad f(x)
    \\
-   \text{subject to} & \quad g(x) \le 0
+   \text{subject to } & \quad g(x) \le 0
 \end{align*}
 where $f$ is scalar-valued and $g$ is vector-valued (so $g$ represents
 a set of inequality constraints).  If there are equality constraints
@@ -693,8 +697,8 @@ Let's check primal feasibility
 \begin{Schunk}
 \begin{Sinput}
 > xbar <- out$primal.solution
-> foo <- qmatmult(hrep[, -c(1, 2)], cbind(xbar))
-> foo <- qpq(hrep[, 2], foo)
+> foo <- qmatmult(hrep[ , - c(1, 2)], cbind(xbar))
+> foo <- qpq(hrep[ , 2], foo)
 > print(foo)
 \end{Sinput}
 \begin{Soutput}
@@ -720,12 +724,11 @@ or the corresponding component of \verb@out$dual.solution@.
 \end{Schunk}
 Finally, we need to check that $\bar{x}$ minimizes the Lagrangian function,
 condition (i).  Since the objective function is affine, and the constraints
-are linear, this can only happen the Lagrangian is a constant function of $x$,
+are linear, this can only happen if the Lagrangian is a constant function of $x$,
 in which case its derivative is zero
 \begin{Schunk}
 \begin{Sinput}
-> qpq(a, qmatmult(rbind(out$dual.solution), hrep[, 
-+     -c(1, 2)]))
+> qpq(a, qmatmult(rbind(out$dual.solution), hrep[ , -c(1, 2)]))
 \end{Sinput}
 \begin{Soutput}
 [1] "0" "0" "0" "0"
@@ -742,8 +745,9 @@ and \verb@hrep[ , -c(1, 2)]@ is $- A$).
 
 \begin{Schunk}
 \begin{Sinput}
-> hrep <- rbind(c("0", "0", "1", "0"), c("0", "0", 
-+     "0", "1"), c("0", "-2", "-1", "-1"))
+> hrep <- rbind(c("0", "0", "1", "0"),
++               c("0", "0", "0", "1"),
++               c("0", "-2", "-1", "-1"))
 > print(hrep)
 \end{Sinput}
 \begin{Soutput}
@@ -782,8 +786,8 @@ inequalities and the feasible region is empty).
 
 \begin{Schunk}
 \begin{Sinput}
-> hrep <- rbind(c("0", "0", "1", "0"), c("0", "0", 
-+     "0", "1"))
+> hrep <- rbind(c("0", "0", "1", "0"),
++               c("0", "0", "0", "1"))
 > print(hrep)
 \end{Sinput}
 \begin{Soutput}
@@ -827,7 +831,7 @@ $$
 $$
 \begin{Schunk}
 \begin{Sinput}
-> qmatmult(hrep[, -c(1, 2)], cbind(out$primal.direction))
+> qmatmult(hrep[ , - c(1, 2)], cbind(out$primal.direction))
 \end{Sinput}
 \begin{Soutput}
      [,1]
@@ -871,9 +875,10 @@ satisfying
 \end{align*}
 We can do this by solving the following LP
 \begin{align*}
-    \text{minimize} & f(z_0, z) = z^T q - z_0
+    \text{minimize } & f(z_0, z) = z^T q - z_0
     \\
     \text{subject to } & z^T p_i - z_0 \le 0, \qquad i \in I
+    \\
                        & z^T q - z_0 \le 1
 \end{align*}
 (the last inequality being inserted to make the LP have
@@ -896,8 +901,8 @@ Let's try it.  First a point in the interior.
 [1] -0.3066386 -1.4936251  0.3856679 -0.4845954
 \end{Soutput}
 \begin{Sinput}
-> hrep <- cbind(0, 0, 1, -x)
-> hrep <- rbind(hrep, c(0, 1, 1, -qin))
+> hrep <- cbind(0, 0, 1, - x)
+> hrep <- rbind(hrep, c(0, 1, 1, - qin))
 > out <- lpcdd(d2q(hrep), d2q(c(-1, qin)), minimize = FALSE)
 > out$optimal.value
 \end{Sinput}
@@ -918,8 +923,8 @@ Now a point in the exterior.
 [1]  1.5204912  0.2065993  3.2111990 -0.2061257
 \end{Soutput}
 \begin{Sinput}
-> hrep <- cbind(0, 0, 1, -x)
-> hrep <- rbind(hrep, c(0, 1, 1, -qout))
+> hrep <- cbind(0, 0, 1, - x)
+> hrep <- rbind(hrep, c(0, 1, 1, - qout))
 > out <- lpcdd(d2q(hrep), d2q(c(-1, qout)), minimize = FALSE)
 > out$optimal.value
 \end{Sinput}
@@ -944,9 +949,11 @@ Here is a toy problem from the on-line help for the \texttt{redundant}
 function.
 \begin{Schunk}
 \begin{Sinput}
-> hrep <- rbind(c(0, 0, 1, 1, 0), c(0, 0, -1, 0, 0), 
-+     c(0, 0, 0, -1, 0), c(0, 0, 0, 0, -1), c(0, 0, 
-+         -1, -1, -1))
+> hrep <- rbind(c(0, 0,  1,  1,  0),
++               c(0, 0, -1,  0,  0),
++               c(0, 0,  0, -1,  0),
++               c(0, 0,  0,  0, -1),
++               c(0, 0, -1, -1, -1))
 > print(hrep)
 \end{Sinput}
 \begin{Soutput}
@@ -1026,8 +1033,8 @@ Eliminating redundant generators from a set of points gives the points
 that are the \emph{vertices} or \emph{extreme points} of the hull.
 \begin{Schunk}
 \begin{Sinput}
-> foo <- cbind(0, cbind(1, x))
-> out <- redundant(d2q(foo), representation = "V")
+> foo <- makeV(points = d2q(x))
+> out <- redundant(foo)
 > nrow(out$output)
 \end{Sinput}
 \begin{Soutput}
@@ -1059,9 +1066,11 @@ Here is a toy problem from the on-line help for the \texttt{allfaces}
 function.
 \begin{Schunk}
 \begin{Sinput}
-> vrep <- rbind(c(0, 1, 1, 1, 0), c(0, 1, 1, -1, 0), 
-+     c(0, 1, -1, 1, 0), c(0, 1, -1, -1, 0), c(0, 1, 
-+         0, 0, 1))
+> vrep <- rbind(c(0, 1,  1,  1, 0),
++               c(0, 1,  1, -1, 0),
++               c(0, 1, -1,  1, 0),
++               c(0, 1, -1, -1, 0),
++               c(0, 1,  0,  0, 1))
 > print(vrep)
 \end{Sinput}
 \begin{Soutput}
