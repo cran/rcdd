@@ -18,6 +18,7 @@
 #include <time.h>
 #include <math.h>
 #include <string.h>
+#include "die.h"
 
 #if defined GMPRATIONAL
 #include "cdd_f.h"
@@ -375,12 +376,17 @@ dd_Arow dd_LPCopyRow(dd_LPPtr lp, dd_rowrange i)
   dd_colrange j;
   dd_Arow a;
 
+  // fix by Geyer of bug detected by clang
+  // move this outside of loop so a is always initialized
+  dd_InitializeArow(lp->d, &a);
+
   if (i>=1 && i<=lp->m){
-    dd_InitializeArow(lp->d, &a);
     for (j=1; j<=lp->d; j++) {
       dd_set(a[j-1],lp->A[i-1][j-1]);
       /* copying the i-th row to a */
     }
+  } else {
+      die("dd_LPCopyRow: i out of range\n");
   }
   return a;
 }
@@ -1820,6 +1826,9 @@ the LP.
   dd_clear(x); dd_clear(sw);
 }
 
+#ifndef R_HAS_JUMPED_THE_SHARK
+#include "my_unif_rand.h"
+#endif /* R_HAS_JUMPED_THE_SHARK */
 
 void dd_RandomPermutation2(dd_rowindex OV,long t,unsigned int seed)
 {
@@ -1827,10 +1836,16 @@ void dd_RandomPermutation2(dd_rowindex OV,long t,unsigned int seed)
   double u,xk,r,rand_max=(double) RAND_MAX;
   int localdebug=dd_FALSE;
 
+#ifdef R_HAS_JUMPED_THE_SHARK
   srand(seed);
+#endif /* R_HAS_JUMPED_THE_SHARK */
   for (j=t; j>1 ; j--) {
+#ifdef R_HAS_JUMPED_THE_SHARK
     r=rand();
     u=r/rand_max;
+#else /* R_HAS_JUMPED_THE_SHARK */
+    u = my_unif_rand();
+#endif /* R_HAS_JUMPED_THE_SHARK */
     xk=(double)(j*u +1);
     k=(long)xk;
 #ifdef R_HAS_JUMPED_THE_SHARK
@@ -3547,6 +3562,12 @@ dd_rowindex *newpos, dd_ErrorType *error) /* 094 */
   m=(*M)->rowsize;
   set_initialize(redset, m);
   revpos=(long *)calloc(m+1,sizeof(long));
+
+  // Geyer: clang complains about uninitialized stuff, let's initialize
+  *impl_linset = NULL;
+  *newpos = NULL;
+  redset1 = NULL;
+  newpos1 = NULL;
   
   success=dd_MatrixCanonicalizeLinearity(M, impl_linset, newpos, error);
 
@@ -3574,6 +3595,8 @@ _L99:
   set_free(redset1);
   free(newpos1);
   free(revpos);
+  if ((impl_linset == NULL) || (newpos == NULL))
+      die("dd_MatrixCanonicalize failed to allocate impl_linset or newpos\n");
   return success;
 }
 
