@@ -1,6 +1,6 @@
-4dd7c7634da4388e86626982b73fbf40 *CHANGES
+0f9dacc4eb67fd0648f860630484bcae *CHANGES
 8d689eff8805f978c48c416cdf784e00 *COPYING
-536f2df631f14f881deabfbc643296df *DESCRIPTION
+ba2faa4fccaa8a06e12f12e6c515fe32 *DESCRIPTION
 c3daa7280b311c98974c350daf46a448 *NAMESPACE
 449f34393e4c03c20af7628f18c8c2ef *R/all.intersect.R
 10b00e421e112c57c3eb51eff4951de4 *R/all.union.R
@@ -9,7 +9,7 @@ c3daa7280b311c98974c350daf46a448 *NAMESPACE
 c6658c3ed25e905ebde344070651044a *R/linearity.R
 c43e0d8cf9a5e8c80c1653932d63dbd2 *R/lpcdd.R
 ae4b46cff5a188ea259c753eb55ed16a *R/makeH.R
-a502721c00fabeda1b07fdfd4428bba5 *R/makeV.R
+8aa7ac04990eb86c8fbc61b1b088422d *R/makeV.R
 03e1f831e34b2077682717316937e06b *R/maximal.R
 3f24a7243d7553a82e912437e3a18386 *R/onAttach.R
 b2e44625b4849b00103291efff642bd2 *R/q2d.R
@@ -32,7 +32,7 @@ d68d1226df9b2a4a1064a8a9ceeb7edc *R/qxq.R
 d345dc0452efc244c17dceef8f1f0e19 *R/validcdd.R
 5290f3354eabd406341b8ae0bdac04e9 *R/z2q.R
 4c46496ba2648bbb7d5f19b4890f08ad *README
-def02ab0408c9da8d9a77c56544578a1 *build/vignette.rds
+ac78ddea63ca897b0a8b52c9ca98871d *build/vignette.rds
 2ac532068c08bd745abd9252277243c3 *cleanup
 f99783373b4f1d030bc850e0011f6ff7 *configure
 f70ed327b4b9a564dde191368f9128ba *configure.ac
@@ -43,7 +43,7 @@ dcae78546dc8956346d894b1c9151e07 *inst/doc/cddlibman.pdf
 1971a67141766293ab39e092a495b722 *inst/doc/design.tex
 20bc3d54d6256b4bf12c1379a832fe3f *inst/doc/vinny.R
 021fcb38c1b3a3b001ec49f371b49c1e *inst/doc/vinny.Rnw
-52b13f621bd35e430ae1c8ae895fcc99 *inst/doc/vinny.pdf
+ef502dad732d5eb614e69c989741631a *inst/doc/vinny.pdf
 12238b61fccc690e6aa528d9d675f38c *man/ArithmeticGMP.Rd
 ac5de660b0ea5295fe81a84c458b2bfa *man/ConvertGMP.Rd
 94b88ceebbb8c574d3e20cc59b98ad9c *man/Subset.Rd
@@ -129,6 +129,8 @@ e6447edcb97f53525035ba7b82091576 *tests/chull2.R
 4d1de3ad9de378d43bf40f9de8384fca *tests/fred.Rout.save
 48e8d3a52a231febc013e3042fe70539 *tests/lpcdd.R
 f7ac2d664b51844a6b71b049c5ca2290 *tests/lpcdd.Rout.save
+ac504eecc8dfcb4f70d537d701d4503d *tests/make.R
+67f9c1b6ce23e021c690695110e0accc *tests/make.Rout.save
 260646d1b745b6ffd42b0e365259c494 *tests/oops.R
 62b0f1c03921d263278e0bd6db73b52e *tests/oops.RData
 a0fb24ae76a040b0a3bf673ea1971f9b *tests/oops.Rout.save
