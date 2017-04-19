@@ -1,24 +1,7 @@
 ### R code from vignette source 'vinny.Rnw'
 
 ###################################################
-### code chunk number 1: foo
-###################################################
-options(keep.source = TRUE, width = 65)
-baz <- library(help = "rcdd")
-baz <- baz$info[[1]]
-baz <- baz[grep("Version", baz)]
-baz <- sub("^Version: *", "", baz)
-bazzer <- paste(R.version$major, R.version$minor, sep = ".")
-
-
-###################################################
-### code chunk number 2: bazzer
-###################################################
-rm(baz, bazzer)
-
-
-###################################################
-### code chunk number 3: try1a
+### code chunk number 1: try1a
 ###################################################
 library(rcdd)
 d <- 3
@@ -28,7 +11,7 @@ print(qux)
 
 
 ###################################################
-### code chunk number 4: try1b
+### code chunk number 2: try1b
 ###################################################
 # unit simplex in V-representation
 out <- scdd(qux)
@@ -36,7 +19,7 @@ print(out)
 
 
 ###################################################
-### code chunk number 5: try1c
+### code chunk number 3: try1c
 ###################################################
 # unit simplex in H-representation
 # note: different from original, but equivalent
@@ -45,7 +28,7 @@ print(out)
 
 
 ###################################################
-### code chunk number 6: try2a
+### code chunk number 4: try2a
 ###################################################
 # add equality constraint
 quux <- addHeq(1:d, 2.2, qux)
@@ -55,14 +38,14 @@ print(out)
 
 
 ###################################################
-### code chunk number 7: try3a
+### code chunk number 5: try3a
 ###################################################
 quuxq <- d2q(quux)
 print(quuxq)
 
 
 ###################################################
-### code chunk number 8: try3b
+### code chunk number 6: try3b
 ###################################################
 bar <- as.numeric(unlist(strsplit(quuxq[5,2], "/")))
 print(bar)
@@ -70,26 +53,26 @@ bar[1] / bar[2]
 
 
 ###################################################
-### code chunk number 9: try3c
+### code chunk number 7: try3c
 ###################################################
 q2d(quuxq)
 
 
 ###################################################
-### code chunk number 10: try3d
+### code chunk number 8: try3d
 ###################################################
 outq <- scdd(quuxq)
 print(outq)
 
 
 ###################################################
-### code chunk number 11: try3d
+### code chunk number 9: try3d
 ###################################################
 print(q2d(outq$output))
 
 
 ###################################################
-### code chunk number 12: try3e
+### code chunk number 10: try3e
 ###################################################
 quuxq <- z2q(round(quux * 10), rep(10, length(quux)))
 print(quuxq)
@@ -98,13 +81,13 @@ print(outq)
 
 
 ###################################################
-### code chunk number 13: try3f
+### code chunk number 11: try3f
 ###################################################
 qmq(outq$output, out$output)
 
 
 ###################################################
-### code chunk number 14: try4a
+### code chunk number 12: try4a
 ###################################################
 d <- 4
 n <- 100
@@ -119,7 +102,7 @@ a <- qneg(v)
 
 
 ###################################################
-### code chunk number 15: try4b
+### code chunk number 13: try4b
 ###################################################
 axb <- qmatmult(a, t(x))
 axb <- sweep(axb, 1, b, FUN = qmq)
@@ -131,7 +114,7 @@ sum(fred == 0)
 
 
 ###################################################
-### code chunk number 16: try4c
+### code chunk number 14: try4c
 ###################################################
 y <- matrix(rnorm(2 * n * d), nrow = 2 * n)
 ayb <- qmatmult(a, t(d2q(y)))
@@ -144,7 +127,7 @@ sum(sally > 0)
 
 
 ###################################################
-### code chunk number 17: try5a
+### code chunk number 15: try5a
 ###################################################
 hrep <- rbind(c("0", "0", "1", "1", "0", "0"),
               c("0", "0", "0", "2", "0", "0"),
@@ -157,13 +140,13 @@ print(out)
 
 
 ###################################################
-### code chunk number 18: try5a-chk1
+### code chunk number 16: try5a-chk1
 ###################################################
 qsum(qxq(a, out$primal.solution))
 
 
 ###################################################
-### code chunk number 19: try5a-chk2
+### code chunk number 17: try5a-chk2
 ###################################################
 xbar <- out$primal.solution
 foo <- qmatmult(hrep[ , - c(1, 2)], cbind(xbar))
@@ -172,19 +155,19 @@ print(foo)
 
 
 ###################################################
-### code chunk number 20: try5a-chk3
+### code chunk number 18: try5a-chk3
 ###################################################
 qxq(foo, out$dual.solution)
 
 
 ###################################################
-### code chunk number 21: try5a-chk4
+### code chunk number 19: try5a-chk4
 ###################################################
 qpq(a, qmatmult(rbind(out$dual.solution), hrep[ , -c(1, 2)]))
 
 
 ###################################################
-### code chunk number 22: try5b
+### code chunk number 20: try5b
 ###################################################
 hrep <- rbind(c("0", "0", "1", "0"),
               c("0", "0", "0", "1"),
@@ -196,7 +179,7 @@ print(out)
 
 
 ###################################################
-### code chunk number 23: try5c
+### code chunk number 21: try5c
 ###################################################
 hrep <- rbind(c("0", "0", "1", "0"),
               c("0", "0", "0", "1"))
@@ -207,19 +190,19 @@ print(out)
 
 
 ###################################################
-### code chunk number 24: try5c-chk1
+### code chunk number 22: try5c-chk1
 ###################################################
 qmatmult(hrep[ , - c(1, 2)], cbind(out$primal.direction))
 
 
 ###################################################
-### code chunk number 25: try5c-chk2
+### code chunk number 23: try5c-chk2
 ###################################################
 qsum(qxq(a, out$primal.direction))
 
 
 ###################################################
-### code chunk number 26: interior-lp
+### code chunk number 24: interior-lp
 ###################################################
 xin <- x[fred < 0, , drop = FALSE]
 qin <- xin[sample(nrow(xin), 1), ]
@@ -232,7 +215,7 @@ out$optimal.value
 
 
 ###################################################
-### code chunk number 27: interior-lp
+### code chunk number 25: interior-lp
 ###################################################
 yout <- y[sally > 0, , drop = FALSE]
 qout <- yout[sample(nrow(yout), 1), ]
@@ -245,7 +228,7 @@ out$optimal.value
 
 
 ###################################################
-### code chunk number 28: toy
+### code chunk number 26: toy
 ###################################################
 hrep <- rbind(c(0, 0,  1,  1,  0),
               c(0, 0, -1,  0,  0),
@@ -257,7 +240,7 @@ redundant(hrep, representation = "H")
 
 
 ###################################################
-### code chunk number 29: vertex
+### code chunk number 27: vertex
 ###################################################
 foo <- makeV(points = d2q(x))
 out <- redundant(foo)
@@ -266,7 +249,7 @@ all((out$new.position == 0) == (fred < 0))
 
 
 ###################################################
-### code chunk number 30: faces
+### code chunk number 28: faces
 ###################################################
 vrep <- rbind(c(0, 1,  1,  1, 0),
               c(0, 1,  1, -1, 0),
@@ -279,7 +262,7 @@ print(hrep)
 
 
 ###################################################
-### code chunk number 31: faces-numbers
+### code chunk number 29: faces-numbers
 ###################################################
 out <- allfaces(hrep)
 d <- unlist(out$dimension)
@@ -289,7 +272,7 @@ print(nd)
 
 
 ###################################################
-### code chunk number 32: faces-numbers
+### code chunk number 30: faces-numbers
 ###################################################
 asl <- sapply(out$active.set, paste, collapse = " ")
 names(asl) <- d
