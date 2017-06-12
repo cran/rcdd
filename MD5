@@ -1,7 +1,7 @@
-e0656bc3c99fda33711116c505853adc *CHANGES
+98a7f812a507183fffdeec2adca507c9 *CHANGES
 8d689eff8805f978c48c416cdf784e00 *COPYING
-91d10b7fdecb6c392403c65bed8ec0bc *DESCRIPTION
-7d6ad2a7fe74957b5f064c4377054ee2 *NAMESPACE
+1c12e4b428f9dd34127194bd8ca36f27 *DESCRIPTION
+99c43af85dd32fc6cd9538203a6af11a *NAMESPACE
 5e76e5e8914eaedc008092992971266f *R/all.intersect.R
 191f4fc546c9ca04f2d46aeac8b3f403 *R/all.union.R
 ec3631356d9a66894811c133f89355f7 *R/allfaces.R
@@ -16,6 +16,7 @@ d3628392862aea54bdd082e4e063e092 *R/maximal.R
 724f5788237e0e34e3d392b6472af583 *R/q2q.R
 4a1dcefbb9a91736ba7efae8fa6fcf5b *R/qabs.R
 df7b6fb7c6226cae0cc5f20bf7a9e391 *R/qdq.R
+067ca19911c30f4032b90a6af6e7753a *R/qgram.R
 4703951eb0e0cac7c29859acb592fcf2 *R/qinv.R
 e46b077c34ef3e418027ff94deebdf2e *R/qmatmult.R
 de2bdebbec54c57b6fa7e77bf2cd85be *R/qmax.R
@@ -32,7 +33,7 @@ b51a8060471a9895c49172acbb643636 *R/qxq.R
 d345dc0452efc244c17dceef8f1f0e19 *R/validcdd.R
 5290f3354eabd406341b8ae0bdac04e9 *R/z2q.R
 4c46496ba2648bbb7d5f19b4890f08ad *README
-2a97d7d2b94205ac388c1ed6990c4386 *build/vignette.rds
+1b9a6d55b5bfafce9e5d12ca11daa307 *build/vignette.rds
 2ac532068c08bd745abd9252277243c3 *cleanup
 adc4368d4672e055066a299bdb6c3617 *configure
 f70ed327b4b9a564dde191368f9128ba *configure.ac
@@ -43,7 +44,7 @@ dcae78546dc8956346d894b1c9151e07 *inst/doc/cddlibman.pdf
 1971a67141766293ab39e092a495b722 *inst/doc/design.tex
 417037e18f427c4df95234b31dfe0706 *inst/doc/vinny.R
 4ab3f17a6cf1c590e0ed382bcdf00e19 *inst/doc/vinny.Rnw
-460e9cce109c8cd0657ba3c3bd986cef *inst/doc/vinny.pdf
+9fcf68ee37934b9894788c6ced90d8c8 *inst/doc/vinny.pdf
 12238b61fccc690e6aa528d9d675f38c *man/ArithmeticGMP.Rd
 ac5de660b0ea5295fe81a84c458b2bfa *man/ConvertGMP.Rd
 94b88ceebbb8c574d3e20cc59b98ad9c *man/Subset.Rd
@@ -52,6 +53,7 @@ a688604365c2ab2708ed176901b69617 *man/allfaces.Rd
 69abba2a4ac87e52d3ca58c15764e67d *man/lpcdd.Rd
 653f41e8d4573687218527d449d9672e *man/makeH.Rd
 08f32b4a0eda4a9ec8abda61916fd725 *man/makeV.Rd
+4f35a2b47ab587b5a22a13d7173dca5d *man/qgram.Rd
 dfab9793a6cd55ea48cae67ddca7aba3 *man/redundant.Rd
 860be362f70b54995a3bfc71b1b6b30d *man/scdd.Rd
 a5ee1cec25ef0140639b727d28948db7 *man/validcdd.Rd
@@ -79,7 +81,7 @@ d755e16122f64a5d21bd789673c5bbc1 *src/cddtypes.h
 e1efd835e0828d77fd145075198ed8e5 *src/d2q.c
 78d4270c5fe0ed137cd673a463355061 *src/die.c
 e2ac208450c0f2b4ebc719b543b4cee3 *src/die.h
-38e9e82be5fcdea407f2d2b65cacdc4e *src/init.c
+2cfcd98b6167368f9f353290dfd63d0e *src/init.c
 8082be31748718ea7eb94ed6784d35b9 *src/linearity.c
 ab7dc9fa329e6297e54751429a5640a6 *src/linearity_f.c
 31e3fe40184f057f359e340e3a840fbf *src/lpcdd.c
@@ -94,6 +96,7 @@ d65a5aa748769fb860fb53d107304806 *src/mycddio.c
 5a9e9f11b9b67851b5b81f2d29717707 *src/nonred.c
 cb0368db791187fabb5a55dfda18e7e7 *src/q2d.c
 de5b9f7739cb593e4f6c8ef60c853840 *src/q2q.c
+5ece66a9b76b334990dd9fead1e223a5 *src/qgram.c
 a9fba8c164f347127f000cffee70bc7c *src/qmatmult.c
 7c21c6fcef44b6d4e9c4fd29d09b5caf *src/qmin.c
 5c705bc76468199f90af424ee8dfcfee *src/qo.c
@@ -101,7 +104,7 @@ ef78ac1e857cf387ddad4952cd66a5ef *src/qoq.c
 88aca14cd1d7c28ffa4287582d922103 *src/qsign.c
 c06ce6891a1eea1915c8c53dc00adf60 *src/qsump.c
 c464f767c4a69126304fb05ee37e3c4f *src/rcdd-win.def
-92e2920822309e40f4b3498ba4b865b7 *src/rcdd.h
+0ee1cb67e40217aa332669ffbe67224d *src/rcdd.h
 90ed5bce9019cdbe82175a41f80519c2 *src/redund.c
 643db71aca03acc00dc2e5553f9a9642 *src/redund_f.c
 eb3ba3b14416c11863c51af83aedeed0 *src/scdd.c
@@ -135,6 +138,8 @@ ac504eecc8dfcb4f70d537d701d4503d *tests/make.R
 260646d1b745b6ffd42b0e365259c494 *tests/oops.R
 62b0f1c03921d263278e0bd6db73b52e *tests/oops.RData
 525764ae0937008792c0d6a40473a8a9 *tests/oops.Rout.save
+adf06dda75589159f33e0107e454d68e *tests/qgram.R
+4a56ccde71f434b793bb196324168bec *tests/qgram.Rout.save
 5d76b3ca6e66dfe0c3c5e4d903c2afd3 *tests/qmatmult.R
 f268276d97dccfb36d61fc5a837f490b *tests/qmatmult.Rout.save
 b1d414e50ec8697d60da828790537e17 *tests/qux-gmp.R
