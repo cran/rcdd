@@ -280,3 +280,60 @@ asl <- asl[order(d)]
 print(asl)
 
 
+###################################################
+### code chunk number 31: agresti-one
+###################################################
+x <- seq(10, 90, 10)
+x <- x[x != 50]
+x
+y <- as.numeric(x > 50)
+y
+
+
+###################################################
+### code chunk number 32: agresti-one-generators
+###################################################
+yy <- matrix(0:1, nrow = 2, ncol = length(x))
+colnames(yy) <- paste0("y", x)
+yy <- expand.grid(as.data.frame(yy))
+head(yy)
+nrow(yy)
+
+
+###################################################
+### code chunk number 33: agresti-one-v-rep
+###################################################
+yy <- as.matrix(yy) # was data frame
+yy.trans = yy %*% cbind(1, x)
+dim(yy.trans)
+
+
+###################################################
+### code chunk number 34: agresti-one-convex-hull
+###################################################
+foo <- makeV(points = d2q(yy.trans))
+out <- redundant(foo)
+nrow(out$output)
+yy.trans <- out$output[ , - c(1, 2)]
+dim(yy.trans)
+
+
+###################################################
+### code chunk number 35: fig1plot
+###################################################
+plot(yy.trans[ , 1], yy.trans[ , 2], xlab = "sum(y)", ylab = "sum(x * y)")
+
+
+###################################################
+### code chunk number 36: fig1
+###################################################
+plot(yy.trans[ , 1], yy.trans[ , 2], xlab = "sum(y)", ylab = "sum(x * y)")
+
+
+###################################################
+### code chunk number 37: agresti-one-v-rep
+###################################################
+out <- scdd(out$output)
+nrow(out$output)
+
+
