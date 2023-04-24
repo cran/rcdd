@@ -1,6 +1,6 @@
-9803657d287cda5e21af77ce206f7f88 *CHANGES
+30f263181387b0718d518ce23633ad50 *CHANGES
 8d689eff8805f978c48c416cdf784e00 *COPYING
-77ecb741b9bb51e06ec9eab0322008f3 *DESCRIPTION
+07f930b125eaa31c51621fba405edd4e *DESCRIPTION
 99c43af85dd32fc6cd9538203a6af11a *NAMESPACE
 5e76e5e8914eaedc008092992971266f *R/all.intersect.R
 191f4fc546c9ca04f2d46aeac8b3f403 *R/all.union.R
@@ -33,7 +33,7 @@ b51a8060471a9895c49172acbb643636 *R/qxq.R
 d345dc0452efc244c17dceef8f1f0e19 *R/validcdd.R
 5290f3354eabd406341b8ae0bdac04e9 *R/z2q.R
 4c46496ba2648bbb7d5f19b4890f08ad *README
-b5a1edb79d0eda5007c5dc29d4bb1a4b *build/vignette.rds
+d96ae0c0db5efd9a5070d993b35f390e *build/vignette.rds
 2ac532068c08bd745abd9252277243c3 *cleanup
 adc4368d4672e055066a299bdb6c3617 *configure
 f70ed327b4b9a564dde191368f9128ba *configure.ac
@@ -44,7 +44,7 @@ dcae78546dc8956346d894b1c9151e07 *inst/doc/cddlibman.pdf
 1971a67141766293ab39e092a495b722 *inst/doc/design.tex
 831de7d17220dde307a54ffa374ecda7 *inst/doc/vinny.R
 af7589b733da81ef465a532c435ca0d3 *inst/doc/vinny.Rnw
-e2797d52ab7d59c0f50a09b552545598 *inst/doc/vinny.pdf
+c9db1fb930539ab23fa93c1aa89ceade *inst/doc/vinny.pdf
 12238b61fccc690e6aa528d9d675f38c *man/ArithmeticGMP.Rd
 ac5de660b0ea5295fe81a84c458b2bfa *man/ConvertGMP.Rd
 94b88ceebbb8c574d3e20cc59b98ad9c *man/Subset.Rd
@@ -60,8 +60,8 @@ dfab9793a6cd55ea48cae67ddca7aba3 *man/redundant.Rd
 4921eed9e7b0f641bb822f51caa2ed8d *src/Makevars.in
 99b9c975d3124fa580d6cbe0927480a8 *src/allfaces.c
 03c6416f72338ef02b0fcbdd0ae1cfe5 *src/allfaces_f.c
-4306e275c5816287dbeba94dd1ef5ff7 *src/cdd.h
-d024e38c5243a046a739ea0fd38bb786 *src/cdd_f.h
+6eadd6e2fde1759028bb2728f54deed5 *src/cdd.h
+e42e5b76e0c8225eae432df290d43b9e *src/cdd_f.h
 c62cba4f5f50b825227a578ed1becbf2 *src/cddcore.c
 98fb2e1afc274c7665b52f01d4803106 *src/cddcore_f.c
 ea20599728d72f021b4f277dec2c5b4b *src/cddio.c
@@ -70,9 +70,9 @@ ea20599728d72f021b4f277dec2c5b4b *src/cddio.c
 9104d196473106a51debbfedf441db34 *src/cddlib_f.c
 6b52683a4542828a23ea0cbd1b520b72 *src/cddlp.c
 9704cc0d7615e621d020c32220382e77 *src/cddlp_f.c
-938b969b70405308ba416d52367e82f0 *src/cddmp.c
+63489a6894c4369e1d066e31b6b5a5f2 *src/cddmp.c
 5d8735a37c4605073be48095d660047d *src/cddmp.h
-92247cd8e6e0c94459373494cae1321b *src/cddmp_f.c
+76e367cfc5ef40e7ce45e28e7d86dab5 *src/cddmp_f.c
 7a0ffe7587a492367d5b5654145994e8 *src/cddmp_f.h
 4fe64e52b5fb097696690336b25f81ce *src/cddproj.c
 93bb922799be02dcf9274bc46efc3bc4 *src/cddproj_f.c
@@ -93,7 +93,7 @@ d65a5aa748769fb860fb53d107304806 *src/mycddio.c
 800ba5e9bf7f5dedcf8d26e1b233688e *src/mycddio.h
 9a4407efd457f90e4f29f430a0ed7e2d *src/mycddio_f.c
 534dc88f3b412eb8affc0c05d92a570e *src/mycddio_f.h
-5a9e9f11b9b67851b5b81f2d29717707 *src/nonred.c
+fbd0f992e867a62553246bac8f7fb2ba *src/nonred.c
 cb0368db791187fabb5a55dfda18e7e7 *src/q2d.c
 de5b9f7739cb593e4f6c8ef60c853840 *src/q2q.c
 5ece66a9b76b334990dd9fead1e223a5 *src/qgram.c
