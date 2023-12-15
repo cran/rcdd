@@ -1,6 +1,6 @@
-30f263181387b0718d518ce23633ad50 *CHANGES
+7ea94ad9ee8d8de69c0e628789f3d1f3 *CHANGES
 8d689eff8805f978c48c416cdf784e00 *COPYING
-07f930b125eaa31c51621fba405edd4e *DESCRIPTION
+5da727216aacba5d0cd35d1c69147845 *DESCRIPTION
 99c43af85dd32fc6cd9538203a6af11a *NAMESPACE
 5e76e5e8914eaedc008092992971266f *R/all.intersect.R
 191f4fc546c9ca04f2d46aeac8b3f403 *R/all.union.R
@@ -33,7 +33,7 @@ b51a8060471a9895c49172acbb643636 *R/qxq.R
 d345dc0452efc244c17dceef8f1f0e19 *R/validcdd.R
 5290f3354eabd406341b8ae0bdac04e9 *R/z2q.R
 4c46496ba2648bbb7d5f19b4890f08ad *README
-d96ae0c0db5efd9a5070d993b35f390e *build/vignette.rds
+11335ca11db03de356ee621be6fc977d *build/vignette.rds
 2ac532068c08bd745abd9252277243c3 *cleanup
 adc4368d4672e055066a299bdb6c3617 *configure
 f70ed327b4b9a564dde191368f9128ba *configure.ac
@@ -44,7 +44,7 @@ dcae78546dc8956346d894b1c9151e07 *inst/doc/cddlibman.pdf
 1971a67141766293ab39e092a495b722 *inst/doc/design.tex
 831de7d17220dde307a54ffa374ecda7 *inst/doc/vinny.R
 af7589b733da81ef465a532c435ca0d3 *inst/doc/vinny.Rnw
-c9db1fb930539ab23fa93c1aa89ceade *inst/doc/vinny.pdf
+120f27bc814bc84ce46c10e659b31cdf *inst/doc/vinny.pdf
 12238b61fccc690e6aa528d9d675f38c *man/ArithmeticGMP.Rd
 ac5de660b0ea5295fe81a84c458b2bfa *man/ConvertGMP.Rd
 94b88ceebbb8c574d3e20cc59b98ad9c *man/Subset.Rd
@@ -79,7 +79,7 @@ ea20599728d72f021b4f277dec2c5b4b *src/cddio.c
 d755e16122f64a5d21bd789673c5bbc1 *src/cddtypes.h
 39b55b75956711224cfd4d6b711240f4 *src/cddtypes_f.h
 e1efd835e0828d77fd145075198ed8e5 *src/d2q.c
-78d4270c5fe0ed137cd673a463355061 *src/die.c
+6e2dd38ac510d3d76ccf8bd0ebd1514d *src/die.c
 e2ac208450c0f2b4ebc719b543b4cee3 *src/die.h
 2cfcd98b6167368f9f353290dfd63d0e *src/init.c
 8082be31748718ea7eb94ed6784d35b9 *src/linearity.c
